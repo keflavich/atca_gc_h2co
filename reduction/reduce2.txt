@@ -1,0 +1,71 @@
+#
+#
+rm -rf MAPS/contmos1.map BEAMS/contmos1.beam
+invert vis=SOURCES/m_01.4930,SOURCES/_m_01.4930 map=MAPS/contmos1.map beam=BEAMS/contmos1.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos1.clean
+clean map=MAPS/contmos1.map beam=BEAMS/contmos1.beam out=CLEANS/contmos1.clean niters=5000
+rm -rf CLRS/contmos1.clr
+restor model=CLEANS/contmos1.clean map=MAPS/contmos1.map beam=BEAMS/contmos1.beam out=CLRS/contmos1.clr
+linmos in=CLRS/contmos1.clr out=CLRS/k
+rm -rf CLRS/contmos1.clr
+mv CLRS/k CLRS/contmos1.clr
+#
+#
+#
+rm -rf MAPS/contmos2.map BEAMS/contmos2.beam
+invert vis=SOURCES/m_02.4930,SOURCES/_m_02.4930 map=MAPS/contmos2.map beam=BEAMS/contmos2.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos2.clean
+clean map=MAPS/contmos2.map beam=BEAMS/contmos2.beam out=CLEANS/contmos2.clean niters=5000
+rm -rf CLRS/contmos2.clr
+restor model=CLEANS/contmos2.clean map=MAPS/contmos2.map beam=BEAMS/contmos2.beam out=CLRS/contmos2.clr
+linmos in=CLRS/contmos2.clr out=CLRS/k
+rm -rf CLRS/contmos2.clr
+mv CLRS/k CLRS/contmos2.clr
+#
+#
+#
+rm -rf MAPS/contmos3.map BEAMS/contmos3.beam
+invert vis=SOURCES/m_03.4930,SOURCES/_m_03.4930 map=MAPS/contmos3.map beam=BEAMS/contmos3.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos3.clean
+clean map=MAPS/contmos3.map beam=BEAMS/contmos3.beam out=CLEANS/contmos3.clean niters=5000
+rm -rf CLRS/contmos3.clr
+restor model=CLEANS/contmos3.clean map=MAPS/contmos3.map beam=BEAMS/contmos3.beam out=CLRS/contmos3.clr
+linmos in=CLRS/contmos3.clr out=CLRS/k
+rm -rf CLRS/contmos3.clr
+mv CLRS/k CLRS/contmos3.clr
+#
+#
+#
+rm -rf MAPS/contmos4.map BEAMS/contmos4.beam
+invert vis=SOURCES/m_04.4930,SOURCES/_m_04.4930 map=MAPS/contmos4.map beam=BEAMS/contmos4.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos4.clean
+clean map=MAPS/contmos4.map beam=BEAMS/contmos4.beam out=CLEANS/contmos4.clean niters=5000
+rm -rf CLRS/contmos4.clr
+restor model=CLEANS/contmos4.clean map=MAPS/contmos4.map beam=BEAMS/contmos4.beam out=CLRS/contmos4.clr
+linmos in=CLRS/contmos4.clr out=CLRS/k
+rm -rf CLRS/contmos4.clr
+mv CLRS/k CLRS/contmos4.clr
+#
+#
+#
+rm -rf MAPS/contmos5.map BEAMS/contmos5.beam
+invert vis=SOURCES/m_05.4930,SOURCES/_m_05.4930 map=MAPS/contmos5.map beam=BEAMS/contmos5.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos5.clean
+clean map=MAPS/contmos5.map beam=BEAMS/contmos5.beam out=CLEANS/contmos5.clean niters=5000
+rm -rf CLRS/contmos5.clr
+restor model=CLEANS/contmos5.clean map=MAPS/contmos5.map beam=BEAMS/contmos5.beam out=CLRS/contmos5.clr
+linmos in=CLRS/contmos5.clr out=CLRS/k
+rm -rf CLRS/contmos5.clr
+mv CLRS/k CLRS/contmos5.clr
+#
+#
+#
+rm -rf MAPS/contmos6.map BEAMS/contmos6.beam
+invert vis=SOURCES/m_06.4930,SOURCES/_m_06.4930 map=MAPS/contmos6.map beam=BEAMS/contmos6.beam imsize=3000 cell=0.5 slop=0.9 robust=2
+rm -rf CLEANS/contmos6.clean
+clean map=MAPS/contmos6.map beam=BEAMS/contmos6.beam out=CLEANS/contmos6.clean niters=5000
+rm -rf CLRS/contmos6.clr
+restor model=CLEANS/contmos6.clean map=MAPS/contmos6.map beam=BEAMS/contmos6.beam out=CLRS/contmos6.clr
+linmos in=CLRS/contmos6.clr out=CLRS/k
+rm -rf CLRS/contmos6.clr
+mv CLRS/k CLRS/contmos6.clr
