@@ -7,3 +7,5 @@ restor model=CLEANS/h2comosaic.clean map=MAPS/h2comosaic.map beam=BEAMS/h2comosa
 linmos in=CLRS/h2comosaic.clr out=CLRS/k
 rm -rf CLRS/h2comosaic.clr
 mv CLRS/k CLRS/h2comosaic.clr
+
+fits in=MAPS/h2comosaic.map out=MAPS/h2comosaic_dirty.fits op=xyout

@@ -21,3 +21,5 @@ fits in=contmos5.clr out=contmos5.fits op=xyout velocity=lsr
 fits in=contmos6.clr out=contmos6.fits op=xyout velocity=lsr
 
 fits in=contmosaic.mem out=contmosaic.fits op=xyout
+
+fits in=h2comosaic.mem out=h2comosaic.fits op=xyout

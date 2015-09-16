@@ -270,3 +270,16 @@ restor model=CLEANS/h2comos6_r0.clean map=MAPS/h2comos6_r0.map beam=BEAMS/h2como
 linmos in=CLRS/h2comos6_r0.clr out=CLRS/k
 rm -rf CLRS/h2comos6_r0.clr
 mv CLRS/k CLRS/h2comos6_r0.clr
+
+
+
+rm -rf temp MAPS/h2comos2_uniform.map BEAMS/h2comos2_uniform.beam
+# line=channel,nchan,start,width,skip
+invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam imsize=1024 cell=0.2 slop=0.9 robust=-2 options=double line=velocity,100,0,2,1
+rm -rf CLEANS/h2comos2_uniform.clean
+clean map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam out=CLEANS/h2comos2_uniform.clean niters=1000
+rm -rf CLRS/h2comos2_uniform.clr
+restor model=CLEANS/h2comos2_uniform.clean map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam out=CLRS/h2comos2_uniform.clr
+linmos in=CLRS/h2comos2_uniform.clr out=CLRS/k
+rm -rf CLRS/h2comos2_uniform.clr
+mv CLRS/k CLRS/h2comos2_uniform.clr
