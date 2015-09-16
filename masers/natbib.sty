@@ -19,15 +19,15 @@
 %% Full documentation can be obtained by LaTeXing that original file.
 %% Only a few abbreviated comments remain here to describe the usage.
 %% =============================================
-%% Copyright 1993-2003 Patrick W Daly
-%% Max-Planck-Institut f\"ur Aeronomie
+%% Copyright 1993-2006 Patrick W Daly
+%% Max-Planck-Institut f\"ur Sonnensystemforschung
 %% Max-Planck-Str. 2
 %% D-37191 Katlenburg-Lindau
 %% Germany
 %% E-mail: daly@linmpi.mpg.de
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \ProvidesPackage{natbib}
-        [2003/06/06 7.1 (PWD)]
+        [2006/03/22 7.3 (PWD)]
  % This package reimplements the LaTeX \cite command to be used for various
  % citation styles, both author-year and numerical. It accepts BibTeX
  % output intended for many other packages, and therefore acts as a
@@ -119,7 +119,7 @@
  % \cite commands make an automatic entry of the citation in the .idx
  % indexing file. For this, \makeindex must also be given in the preamble.
  %
- % LaTeX2e Options: (for selecting punctuation)
+ % Package Options: (for selecting punctuation)
  %   round  -  round parentheses are used (default)
  %   square -  square brackets are used   [option]
  %   curly  -  curly braces are used      {option}
@@ -131,14 +131,21 @@
  %   super  -  numerical citations as superscripts
  %   sort   -  sorts multiple citations according to order in ref. list
  %   sort&compress   -  like sort, but also compresses numerical citations
+ %   compress - compresses without sorting
  %   longnamesfirst  -  makes first citation full author list
  %   sectionbib - puts bibliography in a \section* instead of \chapter*
  % Punctuation so selected dominates over any predefined ones.
- % LaTeX2e options are called as, e.g.
+ % Package options are called as, e.g.
  %        \usepackage[square,comma]{natbib}
  % LaTeX the source file natbib.dtx to obtain more details
  % or the file natnotes.tex for a brief reference sheet.
  %-----------------------------------------------------------
+\@ifclassloaded{agu2001}{\PackageError{natbib}
+  {The agu2001 class already includes natbib coding,\MessageBreak
+   so you should not add it explicitly}
+  {Type <Return> for now, but then later remove\MessageBreak
+   the command \protect\usepackage{natbib} from the document}
+  \endinput}{}
 \@ifclassloaded{aguplus}{\PackageError{natbib}
   {The aguplus class already includes natbib coding,\MessageBreak
    so you should not add it explicitly}
@@ -153,6 +160,12 @@
   \endinput}{}
 \@ifclassloaded{egs}{\PackageError{natbib}
   {The egs class already includes natbib coding,\MessageBreak
+   so you should not add it explicitly}
+  {Type <Return> for now, but then later remove\MessageBreak
+   the command \protect\usepackage{natbib} from the document}
+  \endinput}{}
+\@ifclassloaded{egu}{\PackageError{natbib}
+  {The egu class already includes natbib coding,\MessageBreak
    so you should not add it explicitly}
   {Type <Return> for now, but then later remove\MessageBreak
    the command \protect\usepackage{natbib} from the document}
@@ -218,11 +231,16 @@
 \DeclareOption{openbib}{\NAT@openbibtrue}
 \DeclareOption{sectionbib}{\def\NAT@sectionbib{on}}
 \def\NAT@sort{0}
+\def\NAT@cmprs{0}
 \DeclareOption{sort}{\def\NAT@sort{1}}
-\DeclareOption{sort&compress}{\def\NAT@sort{2}}
+\DeclareOption{compress}{\def\NAT@cmprs{1}}
+\DeclareOption{sort&compress}{\def\NAT@sort{1}\def\NAT@cmprs{1}}
 \@ifpackageloaded{cite}{\PackageWarningNoLine{natbib}
   {The `cite' package should not be used\MessageBreak
    with natbib. Use option `sort' instead}\ExecuteOptions{sort}}{}
+\@ifpackageloaded{citeref}{\PackageError{natbib}
+  {The `citeref' package must be loaded after natbib}%
+  {Move \protect\usepackage{citeref} to after \string\usepackage{natbib}}}{}
 \newif\ifNAT@longnames\NAT@longnamesfalse
 \DeclareOption{longnamesfirst}{\NAT@longnamestrue}
 \DeclareOption{nonamebreak}{\def\NAT@nmfmt#1{\mbox{\NAT@up#1}}}
@@ -256,7 +274,7 @@
     [3]{\ifNAT@swa\NAT@@open\if*#2*\else#2\ \fi
         #1\if*#3*\else\NAT@cmt#3\fi\NAT@@close\else#1\fi\endgroup}
 \newcommand\NAT@citesuper[3]{\ifNAT@swa
-\unskip\kern\p@\textsuperscript{#1}%
+\unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close}%
    \if*#3*\else\ (#3)\fi\else #1\fi\endgroup}
 \providecommand
   \textsuperscript[1]{\mbox{$^{\mbox{\scriptsize#1}}$}}
@@ -268,7 +286,8 @@
   \@cite{\def\NAT@num{-1}\let\NAT@last@yr\relax\let\NAT@nm\@empty
     \@for\@citeb:=\NAT@cite@list\do
     {\edef\@citeb{\expandafter\@firstofone\@citeb}%
-     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}%
+       \@ifundefined{@cprwrite}{}{\expandafter\@cprwrite\@citeb=}\fi
      \@ifundefined{b@\@citeb\@extra@b@citeb}{%
        {\reset@font\bfseries?}
         \NAT@citeundefined\PackageWarning{natbib}%
@@ -287,7 +306,7 @@
             \ifnum\NAT@ctype=2\relax\NAT@test{\NAT@ctype}%
             \else\NAT@alias
             \fi\hyper@natlinkend\else
-       \ifnum\NAT@sort>1
+       \ifnum\NAT@cmprs>0
          \begingroup\catcode`\_=8
             \ifcat _\ifnum\z@<0\NAT@num _\else A\fi
               \global\let\NAT@nm=\NAT@num \else \gdef\NAT@nm{-2}\fi
@@ -297,12 +316,17 @@
          \endgroup
          \ifnum\NAT@nm=\@tempcnta
            \ifx\NAT@last@yr\relax
-             \edef\NAT@last@yr{\@citea \mbox{\noexpand\citenumfont{\NAT@num}}}%
+             \edef\NAT@last@yr{\@citea \mbox{%
+              \noexpand\hyper@natlinkstart{\@citeb\@extra@b@citeb}{%
+               \noexpand\citenumfont{\NAT@num}}\hyper@natlinkend}}%
            \else
-             \edef\NAT@last@yr{--\penalty\@m\mbox{\noexpand\citenumfont{\NAT@num}}}%
+             \edef\NAT@last@yr{--\penalty\@m\mbox{%
+              \noexpand\hyper@natlinkstart{\@citeb\@extra@b@citeb}{%
+             \noexpand\citenumfont{\NAT@num}}\hyper@natlinkend}}%
            \fi
          \else
-           \NAT@last@yr \@citea \mbox{\citenumfont{\NAT@num}}%
+           \NAT@last@yr \@citea \mbox{\hyper@natlinkstart{\@citeb\@extra@b@citeb}%
+              {\citenumfont{\NAT@num}}\hyper@natlinkend}%
            \let\NAT@last@yr\relax
          \fi
        \else
@@ -334,7 +358,7 @@
         \fi
       \fi
       }}%
-      \ifnum\NAT@sort>1\relax\NAT@last@yr\fi
+      \ifnum\NAT@cmprs>0\relax\NAT@last@yr\fi
       \ifNAT@swa\else\ifnum\NAT@ctype=0\if*#2*\else
       \NAT@cmt#2\fi \NAT@@close\fi\fi}{#1}{#2}}
 \newcommand\NAT@test[1]{\ifnum#1=1 \ifx\NAT@nm\NAT@noname
@@ -356,7 +380,8 @@
   \@cite{\let\NAT@nm\@empty\let\NAT@year\@empty
     \@for\@citeb:=\NAT@cite@list\do
     {\edef\@citeb{\expandafter\@firstofone\@citeb}%
-     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi
+     \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}%
+       \@ifundefined{@cprwrite}{}{\expandafter\@cprwrite\@citeb=}\fi
      \@ifundefined{b@\@citeb\@extra@b@citeb}{\@citea%
        {\reset@font\bfseries ?}\NAT@citeundefined
                  \PackageWarning{natbib}%
@@ -502,8 +527,6 @@
   \let\citefullauthor\SK@citefullauthor
   \let\citeyear\SK@citeyear\fi
 \fi}
-\AtBeginDocument{\@ifpackageloaded{hyperref}{%
-  \ifnum\NAT@sort=2\def\NAT@sort{1}\fi}{}}
 \newif\ifNAT@full\NAT@fullfalse
 \newif\ifNAT@swa
 \DeclareRobustCommand\citet

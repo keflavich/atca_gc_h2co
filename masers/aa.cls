@@ -28,9 +28,9 @@
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
 %%
-\def\filedate{2012/05/22}
+\def\filedate{2014/12/1}
 \let\aafiledate\filedate
-\def\fileversion{8.2}
+\def\fileversion{8.3}
 \let\aafileversion\fileversion
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \ProvidesClass{aa}
@@ -85,6 +85,7 @@
 \newif\if@wideboxfn
 \@wideboxfnfalse
 \DeclareOption{wideboxfn}{\@wideboxfntrue}
+%
 \newif\ifaa@longfn
 \DeclareOption{longfn}{\aa@longfntrue}
 \newif\ifaa@longauth
@@ -158,6 +159,23 @@
 \aa@inputenc
 \aa@font
 \ifaa@referee
+\RequirePackage{xcolor}
+\RequirePackage{marginnote}
+\AtEndOfClass{
+\setlength{\marginparwidth}{50mm}
+\setlength{\marginparsep}{5mm}
+}
+%
+\newcounter{lenote}
+\AtBeginDocument{%
+\@ifpackageloaded{hyperref}%
+{\newcommand{\LEm}[1]{\texorpdfstring{\protect\stepcounter{lenote}{\normalfont\textbf{\color{red}[Note \arabic{lenote}] }}
+\protect\marginnote{\baselineskip3ex{\normalsize{\normalfont\textbf{\color{red}[Note \arabic{lenote}: #1]}}}}}{}}
+\newcommand{\LEt}[1]{\texorpdfstring{\protect\stepcounter{lenote}\normalfont\textbf{\color{red}[Note \arabic{lenote}: #1] }}{}}}%
+{\newcommand{\LEm}[1]{\protect\stepcounter{lenote}{\normalfont\textbf{\color{red}[Note \arabic{lenote}] }}
+\protect\marginnote{\baselineskip3ex{\normalsize{\normalfont\textbf{\color{red}[Note \arabic{lenote}: #1]}}}}}
+\newcommand{\LEt}[1]{\protect\stepcounter{lenote}\normalfont\textbf{\color{red}[Note \arabic{lenote}: #1] }}}%
+}
   \renewcommand*\aa@column{onecolumn}
   \aa@twocolumnfalse
   \setlength{\aa@fullwidth}{0.75\aa@fullwidth}
@@ -1442,7 +1460,7 @@
    \@enddocumenthook
    \clearpage
    \advance\c@page \m@ne
-   \immediate\write\@auxout{\string\newlabel{LastPage}{{\thepage}{\thepage}{}{page.\thepage}{}}}
+   \immediate\write\@auxout{\string\newlabel{LastPage}{{\thepage}{\thepage}{}{}{}}}
    \@checkend{document}%
    \clearpage
    \begingroup
@@ -2183,6 +2201,7 @@
 \def\arxiv#1{%
 {\tt \arxivprefixe\arxivprefixesep\ignorespaces#1}%
 }
+\newcommand{\eprint}[2][]{{\tt\if!#1!#2\else#1:#2\fi}}
 \endinput
 %%
 %% End of file `aa.cls'.
