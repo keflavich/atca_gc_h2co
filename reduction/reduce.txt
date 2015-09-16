@@ -2,3 +2,8 @@ atlod in=@uvfiles1 out=raw1_if1-3.uv ifsel=1,3 options=birdie,rfiflag,xycorr,opc
 atlod in=@uvfiles2 out=raw2_if1-3.uv ifsel=1,3 options=birdie,rfiflag,xycorr,opcorr,noauto
 uvcat vis=raw1_if1-3.uv,raw2_if1-3.uv out=raw_if1_AND_if3.uv
 rm -rf raw1_if1-3.uv raw2_if1-3.uv
+
+atlod in=@uvfiles1 out=raw1_if8_5442.uv ifsel=8 options=birdie,rfiflag,xycorr,opcorr,noauto
+atlod in=@uvfiles2 out=raw2_if8_5442.uv ifsel=8 options=birdie,rfiflag,xycorr,opcorr,noauto
+uvcat vis=raw1_if8_5442.uv,raw2_if8_5442.uv out=raw_if8_5442.uv
+rm -rf raw1_if8_5442.uv raw2_if8_5442.uv

@@ -123,21 +123,6 @@ mv CLRS/k CLRS/h2comos1.clr
 #
 #
 #
-rm -rf SOURCES/m02.uvlin temp
-uvcat vis=SOURCES/m_02.4834,SOURCES/_m_02.4834 out=temp
-uvlin vis=temp out=SOURCES/m02.uvlin line=channel,500,700,1,1 chans=1,100,250,320,335,500
-rm -rf temp MAPS/h2comos2.map BEAMS/h2comos2.beam
-invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam imsize=1024 cell=2 slop=0.9 robust=2 options=double
-rm -rf CLEANS/h2comos2.clean
-clean map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam out=CLEANS/h2comos2.clean niters=1000
-rm -rf CLRS/h2comos2.clr
-restor model=CLEANS/h2comos2.clean map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam out=CLRS/h2comos2.clr
-linmos in=CLRS/h2comos2.clr out=CLRS/k
-rm -rf CLRS/h2comos2.clr
-mv CLRS/k CLRS/h2comos2.clr
-#
-#
-#
 rm -rf SOURCES/m03.uvlin temp
 uvcat vis=SOURCES/m_03.4834,SOURCES/_m_03.4834 out=temp
 uvlin vis=temp out=SOURCES/m03.uvlin line=channel,500,700,1,1 chans=1,100,250,320,335,500
@@ -213,18 +198,6 @@ mv CLRS/k CLRS/h2comos1_r0.clr
 #
 #
 #
-rm -rf temp MAPS/h2comos2_r0.map BEAMS/h2comos2_r0.beam
-invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
-rm -rf CLEANS/h2comos2_r0.clean
-clean map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam out=CLEANS/h2comos2_r0.clean niters=1000
-rm -rf CLRS/h2comos2_r0.clr
-restor model=CLEANS/h2comos2_r0.clean map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam out=CLRS/h2comos2_r0.clr
-linmos in=CLRS/h2comos2_r0.clr out=CLRS/k
-rm -rf CLRS/h2comos2_r0.clr
-mv CLRS/k CLRS/h2comos2_r0.clr
-#
-#
-#
 rm -rf temp MAPS/h2comos3_r0.map BEAMS/h2comos3_r0.beam
 invert vis=SOURCES/m03.uvlin map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos3.clean
@@ -273,9 +246,40 @@ mv CLRS/k CLRS/h2comos6_r0.clr
 
 
 
-rm -rf temp MAPS/h2comos2_uniform.map BEAMS/h2comos2_uniform.beam
+rm -rf SOURCES/m02.uvlin m_02_concat
+uvcat vis=SOURCES/m_02.4834,SOURCES/_m_02.4834 out=m_02_concat
+uvlin vis=m_02_concat out=SOURCES/m02.uvlin line=channel,500,700,1,1 chans=1,100,250,320,335,500
+rm -rf m_02_concat MAPS/h2comos2.map BEAMS/h2comos2.beam
+invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam imsize=1024 cell=2 slop=0.9 robust=2 options=double line=velocity,400,-200,1,1
+rm -rf CLEANS/h2comos2.clean
+clean map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam out=CLEANS/h2comos2.clean niters=1000
+rm -rf CLRS/h2comos2.clr
+restor model=CLEANS/h2comos2.clean map=MAPS/h2comos2.map beam=BEAMS/h2comos2.beam out=CLRS/h2comos2.clr
+linmos in=CLRS/h2comos2.clr out=CLRS/k
+rm -rf CLRS/h2comos2.clr
+mv CLRS/k CLRS/h2comos2.clr
+fits in=CLRS/h2comos2.clr out=CLRS/h2comos2.fits op=xyout velocity=lsr
+#
+#
+#
+rm -rf MAPS/h2comos2_r0.map BEAMS/h2comos2_r0.beam
+invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double line=velocity,400,-200,1,1
+rm -rf CLEANS/h2comos2_r0.clean
+clean map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam out=CLEANS/h2comos2_r0.clean niters=1000
+rm -rf CLRS/h2comos2_r0.clr
+restor model=CLEANS/h2comos2_r0.clean map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam out=CLRS/h2comos2_r0.clr
+linmos in=CLRS/h2comos2_r0.clr out=CLRS/k
+rm -rf CLRS/h2comos2_r0.clr
+mv CLRS/k CLRS/h2comos2_r0.clr
+
+fits in=CLRS/h2comos2_r0.clr out=CLRS/h2comos2_r0.fits op=xyout velocity=lsr
+#
+#
+#
+
+rm -rf MAPS/h2comos2_uniform.map BEAMS/h2comos2_uniform.beam
 # line=channel,nchan,start,width,skip
-invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam imsize=1024 cell=0.4 slop=0.9 robust=-2 options=double line=velocity,100,0,2,1
+invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam imsize=1024 cell=0.4 slop=0.9 robust=-2 options=double line=velocity,400,-200,1,1
 rm -rf CLEANS/h2comos2_uniform.clean
 clean map=MAPS/h2comos2_uniform.map beam=BEAMS/h2comos2_uniform.beam out=CLEANS/h2comos2_uniform.clean niters=1000
 rm -rf CLRS/h2comos2_uniform.clr
@@ -283,3 +287,4 @@ restor model=CLEANS/h2comos2_uniform.clean map=MAPS/h2comos2_uniform.map beam=BE
 linmos in=CLRS/h2comos2_uniform.clr out=CLRS/k
 rm -rf CLRS/h2comos2_uniform.clr
 mv CLRS/k CLRS/h2comos2_uniform.clr
+fits in=CLRS/h2comos2_uniform.clr out=CLRS/h2comos2_uniform.fits op=xyout velocity=lsr
