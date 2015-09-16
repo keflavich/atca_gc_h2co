@@ -187,7 +187,7 @@ mv CLRS/k CLRS/h2comos6.clr
 #
 #
 rm -rf temp MAPS/h2comos1_r0.map BEAMS/h2comos1_r0.beam
-invert vis=SOURCES/m01.uvlin map=MAPS/h2comos1_r0.map beam=BEAMS/h2comos1_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
+invert vis=SOURCES/m01.uvlin map=MAPS/h2comos1_r0.map beam=BEAMS/h2comos1_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos1_r0.clean
 clean map=MAPS/h2comos1_r0.map beam=BEAMS/h2comos1_r0.beam out=CLEANS/h2comos1_r0.clean niters=1000
 rm -rf CLRS/h2comos1_r0.clr
@@ -199,7 +199,7 @@ mv CLRS/k CLRS/h2comos1_r0.clr
 #
 #
 rm -rf temp MAPS/h2comos3_r0.map BEAMS/h2comos3_r0.beam
-invert vis=SOURCES/m03.uvlin map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
+invert vis=SOURCES/m03.uvlin map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos3.clean
 clean map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam out=CLEANS/h2comos3_r0.clean niters=1000 
 rm -rf CLRS/h2comos3_r0.clr
@@ -211,7 +211,7 @@ mv CLRS/k CLRS/h2comos3_r0.clr
 #
 #
 rm -rf temp MAPS/h2comos4_r0.map BEAMS/h2comos4_r0.beam
-invert vis=SOURCES/m04.uvlin map=MAPS/h2comos4_r0.map beam=BEAMS/h2comos4_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
+invert vis=SOURCES/m04.uvlin map=MAPS/h2comos4_r0.map beam=BEAMS/h2comos4_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos4_r0.clean
 clean map=MAPS/h2comos4_r0.map beam=BEAMS/h2comos4_r0.beam out=CLEANS/h2comos4_r0.clean niters=1000 
 rm -rf CLRS/h2comos4_r0.clr
@@ -223,7 +223,7 @@ mv CLRS/k CLRS/h2comos4_r0.clr
 #
 #
 rm -rf temp MAPS/h2comos5_r0.map BEAMS/h2comos5_r0.beam
-invert vis=SOURCES/m05.uvlin map=MAPS/h2comos5_r0.map beam=BEAMS/h2comos5_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
+invert vis=SOURCES/m05.uvlin map=MAPS/h2comos5_r0.map beam=BEAMS/h2comos5_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos5_r0.clean
 clean map=MAPS/h2comos5_r0.map beam=BEAMS/h2comos5_r0.beam out=CLEANS/h2comos5_r0.clean niters=1000
 rm -rf CLRS/h2comos5_r0.clr
@@ -235,7 +235,7 @@ mv CLRS/k CLRS/h2comos5_r0.clr
 #
 #
 rm -rf temp MAPS/h2comos6_r0.map BEAMS/h2comos6_r0.beam
-invert vis=SOURCES/m06.uvlin map=MAPS/h2comos6_r0.map beam=BEAMS/h2comos6_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
+invert vis=SOURCES/m06.uvlin map=MAPS/h2comos6_r0.map beam=BEAMS/h2comos6_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double
 rm -rf CLEANS/h2comos6_r0.clean
 clean map=MAPS/h2comos6_r0.map beam=BEAMS/h2comos6_r0.beam out=CLEANS/h2comos6_r0.clean niters=1000
 rm -rf CLRS/h2comos6_r0.clr
@@ -263,7 +263,7 @@ fits in=CLRS/h2comos2.clr out=CLRS/h2comos2.fits op=xyout velocity=lsr
 #
 #
 rm -rf MAPS/h2comos2_r0.map BEAMS/h2comos2_r0.beam
-invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double line=velocity,400,-200,1,1
+invert vis=SOURCES/m02.uvlin map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam imsize=1024 cell=1 slop=0.9 robust=0 options=double line=velocity,400,-200,1,1
 rm -rf CLEANS/h2comos2_r0.clean
 clean map=MAPS/h2comos2_r0.map beam=BEAMS/h2comos2_r0.beam out=CLEANS/h2comos2_r0.clean niters=1000
 rm -rf CLRS/h2comos2_r0.clr
