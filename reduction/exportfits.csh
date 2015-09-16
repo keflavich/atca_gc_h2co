@@ -13,6 +13,8 @@ fits in=h2comos4_r0.clr out=h2comos4_r0.fits op=xyout velocity=lsr
 fits in=h2comos5_r0.clr out=h2comos5_r0.fits op=xyout velocity=lsr
 fits in=h2comos6_r0.clr out=h2comos6_r0.fits op=xyout velocity=lsr
 
+fits in=h2comos2_uniform.clr out=h2comos2_uniform.fits op=xyout velocity=lsr
+
 fits in=contmos1.clr out=contmos1.fits op=xyout velocity=lsr
 fits in=contmos2.clr out=contmos2.fits op=xyout velocity=lsr
 fits in=contmos3.clr out=contmos3.fits op=xyout velocity=lsr
