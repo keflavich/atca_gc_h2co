@@ -15,3 +15,9 @@ uvcat vis=raw1_if3_4834.uv,raw2_if3_4834.uv out=raw_if3_4834.uv
 rm -rf raw1_if3_4834.uv raw2_if3_4834.uv
 
 
+atlod in=@uvfiles1 out=raw1_if19_6672.uv ifsel=19 options=birdie,rfiflag,xycorr,opcorr,noauto
+atlod in=@uvfiles2 out=raw2_if19_6672.uv ifsel=19 options=birdie,rfiflag,xycorr,opcorr,noauto
+uvcat vis=raw1_if19_6672.uv,raw2_if19_6672.uv out=raw_if19_6672.uv
+rm -rf raw1_if19_6672.uv raw2_if19_6672.uv
+
+
