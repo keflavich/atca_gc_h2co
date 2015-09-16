@@ -1,17 +1,66 @@
-Extragalactic masers:
-Arp 220 Baan1986a
-NGC 6240 Wang2013a 2013RAA....13..270W
+%                                                                 aa.dem
+% AA vers. 8.2, LaTeX class for Astronomy & Astrophysics
+% demonstration file
+%                                                       (c) EDP Sciences
+%-----------------------------------------------------------------------
+%
+%\documentclass[referee]{aa} % for a referee version
+%\documentclass[onecolumn]{aa} % for a paper on 1 column  
+%\documentclass[longauth]{aa} % for the long lists of affiliations 
+%\documentclass[rnote]{aa} % for the research notes
+%\documentclass[letter]{aa} % for the letters 
+%\documentclass[bibyear]{aa} % if the references are not structured 
+% according to the author-year natbib style
 
-Abstract:
-We have found a new \formaldehyde \oneone (formaldehyde) maser in the Galactic
+%
+\documentclass{aa}  
+
+%
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{txfonts}
+\input{macros}		% file containing author's macro definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[options]{hyperref}
+% To add links in your PDF file, use the package "hyperref"
+% with options according to your LaTeX or PDFLaTeX drivers.
+%
+\begin{document} 
+
+
+   \title{New \formaldehyde Maser in G0.38+0.04}
+
+   \subtitle{}
+
+   \author{Getal}
+
+   \institute{institoot}
+
+   \date{whatdate}
+
+% \abstract{}{}{}{}{} 
+% 5 {} token are mandatory
+ 
+  \abstract
+   {We have found a new \formaldehyde \oneone (formaldehyde) maser in the Galactic
 Center Cloud C, G0.38+0.04.  At the time of publication, this is the eighth
 region containing a \formaldehyde detected in the galaxy.  Cloud C is the only
 region of confirmed high-mass star formation along the Galactic Center Ridge,
 further confirming that \formaldehyde masers are exclusively associated with high-mass
 star formation.
+}
+
+   \keywords{  }
+
+   \maketitle
+
+%Extragalactic masers:
+%Arp 220 Baan1986a
+%NGC 6240 Wang2013a 2013RAA....13..270W
 
 
-Introduction:
+
+\section{Introduction}
 Masers are important tracers of star formation, shocked gas, evolved stars, and
 in other galaxies, circumnuclear disks.  While many masers are very common in
 the Galaxy and readily detected in other galaxies (e.g., OH, \methanol,
@@ -29,10 +78,10 @@ are associated with regions of high-mass star formation
 % Forster et al. 1980, Whiteoak & Gardner 1983, Pratap et al. 1994,
 
 
-Observations:
-ATCA observations were perfomed in 2015 as part of a larger survey.
+\section{Observations}
+ATCA observations were performed in 2015 as part of a larger survey.
 
-Analysis:
+\section{Analysis}
 We detect one narrow line ($\sigma<1.3$ \kms, below the instrument resolution)
 at $v=36.7$ \kms with an amplitude of 235 mJy/beam, where the restoring beam is
 $4.84\arcsec\times1.49\arcsec$.  This translates to a brightness temperature of
@@ -48,7 +97,7 @@ emission would still be detectable, so larger dishes, e.g. Arecibo and FAST,
 could detect similar sources.  However, extragalactic detections of such weak
 masers is extremely unlikely.
 
-Discussion:
+\section{Discussion}
 Out of the 8 known maser-containing regions in the Galaxy, there are now two in
 the Central Molecular Zone.  These two regions, Cloud C and Sgr B2, are the only
 dense clouds in the CMZ with known high-mass star formation.  Sgr C also shows
@@ -71,8 +120,13 @@ accuracy of ATCA of 0.5\arcsec
 \citep[][respectively]{Caswell2010a,Walsh2014a,Argon2000a}.  Clearly, this is
 an amasering region.  Maybe we should look for SiO and \ammonia masers next.
 
-TODO
--Other masers in Cloud C?
-  YES: methanol (our data, Caswell 1996)
-  YES: water (Walsh 2011, 2014)
-  YES: OH (Argon2000a)
+%TODO
+%-Other masers in Cloud C?
+%  YES: methanol (our data, Caswell 1996)
+%  YES: water (Walsh 2011, 2014)
+%  YES: OH (Argon2000a)
+  
+\end{document}
+
+
+
