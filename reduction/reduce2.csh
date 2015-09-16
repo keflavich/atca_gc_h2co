@@ -87,7 +87,7 @@ mv CLRS/k CLRS/h2comos2_r0.clr
 #
 rm -rf temp MAPS/h2comos3_r0.map BEAMS/h2comos3_r0.beam
 invert vis=SOURCES/m03.uvlin map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam imsize=1024 cell=2 slop=0.9 robust=0 options=double
-rm -rf CLEANS/h2comos3.clean
+rm -rf CLEANS/h2comos3_r0.clean
 clean map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam out=CLEANS/h2comos3_r0.clean niters=1000 
 rm -rf CLRS/h2comos3_r0.clr
 restor model=CLEANS/h2comos3_r0.clean map=MAPS/h2comos3_r0.map beam=BEAMS/h2comos3_r0.beam out=CLRS/h2comos3_r0.clr
