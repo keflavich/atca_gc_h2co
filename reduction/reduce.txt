@@ -1,0 +1,4 @@
+atlod in=@uvfiles1 out=raw1_if1-3.uv ifsel=1,3 options=birdie,rfiflag,xycorr,opcorr,noauto
+atlod in=@uvfiles2 out=raw2_if1-3.uv ifsel=1,3 options=birdie,rfiflag,xycorr,opcorr,noauto
+uvcat vis=raw1_if1-3.uv,raw2_if1-3.uv out=raw_if1_AND_if3.uv
+rm -rf raw1_if1-3.uv raw2_if1-3.uv
