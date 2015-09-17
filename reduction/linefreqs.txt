@@ -31,7 +31,10 @@ IF#   Freq   Line
 
 
 priority:
-continuum
+H2CO
+continuum low
+CH3OH maser line
+continuum high
 HNCO
 methylamine
 RRLs
