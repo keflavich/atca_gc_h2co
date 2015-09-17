@@ -122,9 +122,11 @@ uvlin vis=m06.uvcat out=SOURCES/m06.uvlin line=channel,2048,1,1,1 chans=50,950,1
 
 ls -1d SOURCES/*uvlin > ch3oh.uvlin.sources
 
-rm -rf MAPS/ch3oh_mosaic.map BEAMS/ch3oh_mosaic.beam
+rm -rf MAPS/ch3oh_mosaic_contsub.map BEAMS/ch3oh_mosaic.beam
 invert vis=@ch3oh.uvlin.sources map=MAPS/ch3oh_mosaic_contsub.map beam=BEAMS/ch3oh_mosaic.beam imsize=1024 cell=1 slop=0.9 options=double,mosaic line=velocity,200,-200,2,2
 rm -rf CLEANS/ch3oh_mosaic_contsub.clean
 clean map=MAPS/ch3oh_mosaic_contsub.map beam=BEAMS/ch3oh_mosaic.beam out=CLEANS/ch3oh_mosaic_contsub.clean niters=1000
 rm -rf CLRS/ch3oh_mosaic_contsub.clr
 restor model=CLEANS/ch3oh_mosaic_contsub.clean map=MAPS/ch3oh_mosaic_contsub.map beam=BEAMS/ch3oh_mosaic.beam out=CLRS/ch3oh_mosaic_contsub.clr
+
+fits in=CLRS/ch3oh_mosaic_contsub.clr out=CLRS/ch3oh_mosaic_contsub_clean.fits op=xyout
