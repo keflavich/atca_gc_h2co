@@ -30,3 +30,10 @@ IF#   Freq   Line
 ?? 5520   CH2CN (5517.330, cyanomethyl) and CH2CHCN (5518.282-.292, vinyl cyanide)
 
 
+priority:
+continuum
+HNCO
+methylamine
+RRLs
+H2CO isotopologues
+HCnN
