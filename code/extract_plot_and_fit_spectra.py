@@ -160,7 +160,7 @@ tbl = Table([Column([names[name] for name in results], name='Line'),
              Column([results[name][3] for name in results], name='$\sigma(b)$', unit=u.deg),
              Column([results[name][4] for name in results], name='$v_{LSR}$', unit=u.km/u.s),
              Column([results[name][5] for name in results], name='$\sigma(v_{LSR})$', unit=u.km/u.s),
-             Column(['This Work' for name in results], name='Discovery', dtype='S20'),
+             Column(['This Work' for name in results], name='Measurement', dtype='S20'),
             ])
 
 latexdict['header_start'] = '\label{tab:measurements}'
@@ -211,7 +211,7 @@ mtbl = Table([Column([name for name in results], name='Line'),
              Column([results[name][3] for name in results], name='eglat', unit=u.deg),
              Column([results[name][4] for name in results], name='vcen', unit=u.km/u.s),
              Column([results[name][5] for name in results], name='e_vcen', unit=u.km/u.s),
-             Column(['This Work' for name in results], name='Discovery', dtype='S20'),
+             Column(['This Work' for name in results], name='Measurement', dtype='S20'),
             ])
 mtbl.write('../data/my_maser_table.csv', format='ascii.ecsv')
 
