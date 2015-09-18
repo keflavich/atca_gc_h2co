@@ -130,3 +130,30 @@ rm -rf CLRS/ch3oh_mosaic_contsub.clr
 restor model=CLEANS/ch3oh_mosaic_contsub.clean map=MAPS/ch3oh_mosaic_contsub.map beam=BEAMS/ch3oh_mosaic.beam out=CLRS/ch3oh_mosaic_contsub.clr
 
 fits in=CLRS/ch3oh_mosaic_contsub.clr out=CLRS/ch3oh_mosaic_contsub_clean.fits op=xyout
+
+
+
+rm -rf MAPS/ch3ohmos2_uniform.map BEAMS/ch3ohmos2_uniform.beam
+# line=channel,nchan,start,width,skip
+invert vis=SOURCES/m02.uvlin map=MAPS/ch3ohmos2_uniform.map beam=BEAMS/ch3ohmos2_uniform.beam imsize=1024 cell=0.4 slop=0.9 options=double line=velocity,200,-200,2,2
+rm -rf CLEANS/ch3ohmos2_uniform.clean
+clean map=MAPS/ch3ohmos2_uniform.map beam=BEAMS/ch3ohmos2_uniform.beam out=CLEANS/ch3ohmos2_uniform.clean niters=1000
+rm -rf CLRS/ch3ohmos2_uniform.clr
+restor model=CLEANS/ch3ohmos2_uniform.clean map=MAPS/ch3ohmos2_uniform.map beam=BEAMS/ch3ohmos2_uniform.beam out=CLRS/ch3ohmos2_uniform.clr
+linmos in=CLRS/ch3ohmos2_uniform.clr out=CLRS/k
+rm -rf CLRS/ch3ohmos2_uniform.clr
+mv CLRS/k CLRS/ch3ohmos2_uniform.clr
+fits in=CLRS/ch3ohmos2_uniform.clr out=CLRS/ch3ohmos2_uniform.fits op=xyout velocity=lsr
+
+# to look for Sgr B2 masers
+rm -rf MAPS/ch3ohmos1_uniform.map BEAMS/ch3ohmos1_uniform.beam
+# line=channel,nchan,start,width,skip
+invert vis=SOURCES/m01.uvlin map=MAPS/ch3ohmos1_uniform.map beam=BEAMS/ch3ohmos1_uniform.beam imsize=1024 cell=0.4 slop=0.9 options=double line=velocity,200,-200,2,2
+rm -rf CLEANS/ch3ohmos1_uniform.clean
+clean map=MAPS/ch3ohmos1_uniform.map beam=BEAMS/ch3ohmos1_uniform.beam out=CLEANS/ch3ohmos1_uniform.clean niters=1000
+rm -rf CLRS/ch3ohmos1_uniform.clr
+restor model=CLEANS/ch3ohmos1_uniform.clean map=MAPS/ch3ohmos1_uniform.map beam=BEAMS/ch3ohmos1_uniform.beam out=CLRS/ch3ohmos1_uniform.clr
+linmos in=CLRS/ch3ohmos1_uniform.clr out=CLRS/k
+rm -rf CLRS/ch3ohmos1_uniform.clr
+mv CLRS/k CLRS/ch3ohmos1_uniform.clr
+fits in=CLRS/ch3ohmos1_uniform.clr out=CLRS/ch3ohmos1_uniform.fits op=xyout velocity=lsr

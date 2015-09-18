@@ -288,3 +288,29 @@ linmos in=CLRS/h2comos2_uniform.clr out=CLRS/k
 rm -rf CLRS/h2comos2_uniform.clr
 mv CLRS/k CLRS/h2comos2_uniform.clr
 fits in=CLRS/h2comos2_uniform.clr out=CLRS/h2comos2_uniform.fits op=xyout velocity=lsr
+
+# to look for Sgr B2 masers
+rm -rf MAPS/h2comos1_uniform.map BEAMS/h2comos1_uniform.beam
+# line=channel,nchan,start,width,skip
+invert vis=SOURCES/m01.uvlin map=MAPS/h2comos1_uniform.map beam=BEAMS/h2comos1_uniform.beam imsize=2048 cell=0.6 slop=0.9 options=double line=velocity,200,-200,2,2
+rm -rf CLEANS/h2comos1_uniform.clean
+clean map=MAPS/h2comos1_uniform.map beam=BEAMS/h2comos1_uniform.beam out=CLEANS/h2comos1_uniform.clean niters=1000
+rm -rf CLRS/h2comos1_uniform.clr
+restor model=CLEANS/h2comos1_uniform.clean map=MAPS/h2comos1_uniform.map beam=BEAMS/h2comos1_uniform.beam out=CLRS/h2comos1_uniform.clr
+linmos in=CLRS/h2comos1_uniform.clr out=CLRS/k
+rm -rf CLRS/h2comos1_uniform.clr
+mv CLRS/k CLRS/h2comos1_uniform.clr
+fits in=CLRS/h2comos1_uniform.clr out=CLRS/h2comos1_uniform.fits op=xyout velocity=lsr
+
+# to look for Sgr B2 masers
+rm -rf MAPS/h2comos1_superuniform.map BEAMS/h2comos1_superuniform.beam
+# line=channel,nchan,start,width,skip
+invert vis=SOURCES/m01.uvlin map=MAPS/h2comos1_superuniform.map beam=BEAMS/h2comos1_superuniform.beam imsize=2048 cell=0.6 slop=0.9 options=double line=velocity,100,0,2,2 select='uvrange(40,100)'
+rm -rf CLEANS/h2comos1_superuniform.clean
+clean map=MAPS/h2comos1_superuniform.map beam=BEAMS/h2comos1_superuniform.beam out=CLEANS/h2comos1_superuniform.clean niters=1000
+rm -rf CLRS/h2comos1_superuniform.clr
+restor model=CLEANS/h2comos1_superuniform.clean map=MAPS/h2comos1_superuniform.map beam=BEAMS/h2comos1_superuniform.beam out=CLRS/h2comos1_superuniform.clr
+linmos in=CLRS/h2comos1_superuniform.clr out=CLRS/k
+rm -rf CLRS/h2comos1_superuniform.clr
+mv CLRS/k CLRS/h2comos1_superuniform.clr
+fits in=CLRS/h2comos1_superuniform.clr out=CLRS/h2comos1_superuniform.fits op=xyout velocity=lsr
