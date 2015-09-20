@@ -170,7 +170,7 @@ latexdict['caption'] = 'Maser Line Parameters'
 #latexdict['tabulartype'] = 'longtable'
 
 for row,crd in zip(walshtbl, h2ocoords):
-    tbl.add_row(['H$_2$O '+row['m_Name'], crd.galactic.l, crd.galactic.b, 1./3600, 1./3600, row['Vp'], 1.0, 'Walsh 2014'])
+    tbl.add_row(['H$_2$O '+row['Name']+"\_"+row['m_Name'], crd.galactic.l, crd.galactic.b, 1./3600, 1./3600, row['Vp'], 1.0, 'Walsh 2014'])
 for row in other_masers:
     tbl.add_row(row)
 
