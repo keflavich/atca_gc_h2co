@@ -24,6 +24,9 @@ names = {'h2co11': 'H$_2$CO $1_{1,0}-1_{1,1}$',
          'ch3oh44': 'CH$_3$OH $7_{0,7}-6_{1,6}$ A+',
          'oh': 'OH',
          'ch3oh6': 'CH$_3$OH $5(1,5)-6(0,6)++$',
+         'siov0_54': 'SiO J=5-4 v=0',
+         'siov0_10': 'SiO J=1-0 v=0',
+         'siov0_21': 'SiO J=2-1 v=0',
         }
 
 for ii in pl.get_fignums(): pl.close(ii)
@@ -36,6 +39,8 @@ for cubename,cubefn in [('h2co11', '../data/h2comos2_uniform_min.fits'),
                         ('siov2', '../data/M447_SiO_v2_cube.fits'),
                         ('ch3oh44', '../data/M447_CH3OH_A+_4407_cube.fits'),
                         ('ch3oh6', '../data/ch3ohmos2_uniform_min.fits'),
+                        #('siov0',
+                        ('siov0_54', '../../apex/merged_datasets/molecule_cubes/APEX_SiO_54_bl.fits'),
                        ]:
 
     cube = SpectralCube.read(cubefn).with_spectral_unit(u.km/u.s)
@@ -68,7 +73,16 @@ for cubename,cubefn in [('h2co11', '../data/h2comos2_uniform_min.fits'),
     sp.specfit(guesses='moments', negamp=False)
     sp.specfit(guesses='moments', negamp=False)
     sp.plotter.savefig('../figures/{0}_gaussian_fit.png'.format(cubename))
+    sp.plotter.savefig('../figures/{0}_gaussian_fit.pdf'.format(cubename))
     sp.write('../data/spectra/cloudc_{0}.fits'.format(cubename), clobber=True)
+    arr = np.vstack([sp.xarr, sp.data]).T
+    hdr = "\n".join(["{2} position="+str(coordinate.to_string('hmsdms')),
+                     "Column 1: Velocity, unit={0}  Column 2: flux, unit={1}",
+                     "{0:10s} {1:10s}".format("Velocity", "Flux"),
+                     "{0:10s} {1:10s}"])
+    np.savetxt('../data/spectra/cloudc_{0}.txt'.format(cubename), arr,
+               header=hdr.format(sp.xarr.unit, sp.unit, cubename),
+               fmt="%10f")
 
     vrange = (sp.specfit.parinfo[1].value - 2*sp.specfit.parinfo[2].value,
               sp.specfit.parinfo[1].value + 2*sp.specfit.parinfo[2].value)*u.km/u.s
@@ -143,7 +157,8 @@ for cubename,cubefn in [('h2co11', '../data/h2comos2_uniform_min.fits'),
     b_rounded, eb_rounded = rounded(fitcoord.galactic.b.deg, dy_deg)
     v_rounded, ev_rounded = rounded(sp.specfit.parinfo[1].value, sp.specfit.parinfo[1].error)
 
-    results[cubename] = [l_rounded, b_rounded, el_rounded, eb_rounded, v_rounded, ev_rounded,]
+    if 'v0' not in cubename:
+        results[cubename] = [l_rounded, b_rounded, el_rounded, eb_rounded, v_rounded, ev_rounded,]
 
 
 other_masers = Table.read('../data/other_masers.tbl', format='ascii.ecsv')

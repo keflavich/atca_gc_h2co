@@ -14,6 +14,8 @@ from mpl_toolkits.axes_grid1 import host_subplot
 import pylab as pl
 pl.matplotlib.rc_file('pubfiguresrc')
 
+dist=8.5*u.kpc
+
 walshtbl = Vizier.query_region(coordinates.SkyCoord(0.38*u.deg, +0.04*u.deg,
                                                     frame='galactic'),
                                radius=0.5*u.arcmin, catalog='J/MNRAS/442/2240')[0]
@@ -24,6 +26,10 @@ pl.close(2)
 pl.figure(1)
 pl.clf()
 ax = host_subplot(111, axes_class=AA.Axes)
+
+def trp(tup, alpha):
+    """ make a color tuple more transparent """
+    return tup[:3] + (alpha,)
 
 
 h2ocoords = coordinates.SkyCoord(walshtbl['_RAJ2000'], walshtbl['_DEJ2000'],
@@ -46,14 +52,28 @@ names = {'h2co11': 'H$_2$CO $1_{1,0}-1_{1,1}$',
         }
 markers = {'h2o': 'x',
            'h2co11': 'o',
-           'ch3oh44': 'd',
-           'ch3oh6': 'p',
+           'ch3oh44': 'p',
+           'ch3oh6': 'D',
            'siov1': '^',
            'siov2': 'v',
-           'oh': 'h',
-           'OH': 'h',
+           'oh': '*',
+           'OH': '*',
           }
 markersize=200
+
+# 17:46:21.4, -28.35.40.2
+core_coord = coordinates.SkyCoord('17:46:21.4 -28:35:40.2', frame='fk5', unit=(u.hour, u.deg))
+ax.plot(core_coord.galactic.l.deg, core_coord.galactic.b.deg, marker='x', color='k',
+        markersize=30, zorder=100)
+
+#length = 0.5*u.pc
+#ax.plot([0.384, 0.384-(length/dist).to(u.deg, u.dimensionless_angles()).value],
+#        [0.032, 0.032], 'k-')
+#ax.text(0.384-(length/dist).to(u.deg, u.dimensionless_angles()).value/2.,
+#        0.0325,
+#        "0.5 pc",
+#        horizontalalignment='center',
+#        )
 
 sc = ax.scatter(h2ocoords.galactic.l.deg, h2ocoords.galactic.b.deg, marker='s',
            c=cmap(norm(walshtbl['Vp'])),
@@ -130,8 +150,14 @@ cb.set_label('Velocity (km/s)')
 
 pl.savefig('../figures/maser_spots.png')
 
+
 pl.figure(2).clf()
 ax = host_subplot(111, axes_class=AA.Axes)
+ax.plot(core_coord.galactic.l.deg, core_coord.galactic.b.deg, marker='x', color='k',
+        markersize=30, zorder=100)
+
+norm = pl.matplotlib.colors.Normalize(vmin=9, vmax=50)
+
 sc = ax.scatter(h2ocoords.galactic.l.deg, h2ocoords.galactic.b.deg, marker='s',
                 c=cmap(norm(walshtbl['Vp'])),
                 s=markersize,
@@ -142,24 +168,37 @@ sc = ax.scatter(h2ocoords.galactic.l.deg, h2ocoords.galactic.b.deg, marker='s',
           )
 ax.errorbar(h2ocoords.galactic.l.deg, h2ocoords.galactic.b.deg, xerr=1./3600,
             yerr=1./3600, marker='', markerfacecolor='none', linestyle='none',
-            markeredgecolor='none', ecolor='k', alpha=0.75, zorder=-10)
+            markeredgecolor='none', ecolor='k', alpha=0.5, zorder=-10)
 for row in masertbl:
-    if 'h2co' in row['Line'] or 'ch3oh6' in row['Line']:
+    if 'h2co' in row['Line'] or 'ch3oh6' in row['Line'] or 'OH' in row['Line']:
         ax.scatter(row['glon'], row['glat'], marker=markers[row['Line']],
-                   c=cmap(norm(row['vcen'])), s=markersize,
+                   c=trp(cmap(norm(row['vcen'])), 0.5), s=markersize,
                    edgecolor=cmap(norm(row['vcen'])),
-                   alpha=0.75,
                    label=names[row['Line']],
+                   linewidth=4,
                   )
         ax.errorbar(row['glon'], row['glat'], xerr=1./3600, yerr=1./3600,
                     marker='', markerfacecolor='none', linestyle='none',
-                    markeredgecolor='none', ecolor='k', alpha=0.75, zorder=-10)
+                    markeredgecolor='none', ecolor='k', alpha=0.5, zorder=-10)
+for row in other_masers:
+    if 'OH' in row['Line']:
+        ax.scatter(row['glon'], row['glat'], marker=markers[row['Line']],
+                   c=trp(cmap(norm(row['vcen'])), 0.75), s=markersize,
+                   linewidth=4,
+                   edgecolor=cmap(norm(row['vcen'])),
+                   label=names[row['Line']],
+                  )
+        ax.errorbar(row['glon'], row['glat'], xerr=row['eglon'], yerr=row['eglat'],
+                    marker='', markerfacecolor='none', linestyle='none',
+                    markeredgecolor='none', ecolor='k', alpha=0.5, zorder=-10)
+
+
 xcen=0.376
 ycen=0.040
 ax.axis((0.37617, 0.37537, 0.0399, 0.04014))
-midy = 0.04075
-midx = 0.37575
-ax.axis((midx+0.0012, midx-0.0012, midy-0.0012, midy+0.0012,))
+midy = 0.0400 #0.04075
+midx = 0.37580
+ax.axis((midx+0.0006, midx-0.0006, midy-0.0006, midy+0.0006,))
 
 xticks = ax.get_xticks()
 yticks = ax.get_yticks()
@@ -167,6 +206,14 @@ xlim = np.array(ax.get_xlim())
 ylim = np.array(ax.get_ylim())
 #print("ax xlim: {0} ylim: {1}".format(xlim, ylim))
 
+length = 5000*u.au
+ax.plot([0.3756, 0.3756-(length/dist).to(u.deg, u.dimensionless_angles()).value],
+        [0.0404, 0.0404], 'k-')
+ax.text(0.3756-(length/dist).to(u.deg, u.dimensionless_angles()).value/2.,
+        0.040425,
+        "5000 AU",
+        horizontalalignment='center',
+        )
 
 ax2 = ax.twin()
 ax2.set_xticklabels(["{0:0.1f}".format((x-xcen)*3600) for x in xticks])
@@ -187,7 +234,7 @@ sc = pl.matplotlib.cm.ScalarMappable(cmap=cmap_trans, norm=norm)
 sc._A = np.array([norm.vmin, norm.vmax])
 cb = pl.colorbar(sc, pad=0.15)
 cb.set_label('Velocity (km/s)')
-pl.legend(loc='best')
+L = pl.legend(loc='best', prop={'size':14})
 
 pl.savefig('../figures/maser_spots_zoom.png')
 
