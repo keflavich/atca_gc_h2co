@@ -21,13 +21,15 @@ coordinate = coordinates.SkyCoord(*reg.coord_list, frame=reg.coord_format, unit=
 names = {'h2co11': 'H$_2$CO $1_{1,0}-1_{1,1}$',
          'siov1': 'SiO J=1-0 v=1',
          'siov2': 'SiO J=1-0 v=2',
-         'ch3oh44': 'CH$_3$OH $7_{0,7}-6_{1,6}$ A+',
+         'ch3oh44': 'CH$_3$OH $7_0 - 6_1\\mathrm{~A}^+$',
+         'ch3oh6': 'CH$_3$OH $5_1 - 6_0\\mathrm{~A}^+$',
          'oh': 'OH',
-         'ch3oh6': 'CH$_3$OH $5(1,5)-6(0,6)++$',
          'siov0_54': 'SiO J=5-4 v=0',
          'siov0_10': 'SiO J=1-0 v=0',
          'siov0_21': 'SiO J=2-1 v=0',
         }
+#\newcommand{\fivesix}{\ensuremath{5_1 - 6_0$~A$^+}\xspace}
+#\newcommand{\sevensix}{\ensuremath{7_0 - 6_1$~A$^+}\xspace}
 
 for ii in pl.get_fignums(): pl.close(ii)
 T,F = True,False
